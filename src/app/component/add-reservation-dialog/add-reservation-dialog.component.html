@@ -1,0 +1,17 @@
+<h1 mat-dialog-title>Trainingsanmeldung</h1>
+<div mat-dialog-content>
+  <mat-form-field>
+    <mat-label>Dein Name</mat-label>
+    <input matInput [(ngModel)]="reservation.player">
+  </mat-form-field>
+  <br>
+  <mat-form-field>
+    <mat-label>Name deines Partners|in</mat-label>
+    <input matInput [(ngModel)]="reservation.partner">
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button mat-button matDialogClose>Abbrechen</button>
+  <button mat-button matDialogClose [disabled]="!valid()" (click)="create(reservation)">Anmelden
+  </button>
+</div>
