@@ -3,4 +3,5 @@ export interface Reservation {
   player: string;
   partner: string;
   training: string;
+  date: Date;
 }

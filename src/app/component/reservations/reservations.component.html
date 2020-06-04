@@ -20,6 +20,11 @@
       <td mat-cell *matCellDef="let row">{{row.partner}}</td>
     </ng-container>
 
+    <ng-container matColumnDef="date">
+      <th mat-header-cell *matHeaderCellDef>Anmeldedatum</th>
+      <td mat-cell *matCellDef="let row">{{toDate(row.date) | date:'mediumDate'}}</td>
+    </ng-container>
+
     <ng-container matColumnDef="delete">
       <th mat-header-cell *matHeaderCellDef></th>
       <td mat-cell *matCellDef="let row">

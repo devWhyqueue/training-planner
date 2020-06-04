@@ -9,6 +9,8 @@ import {TrainingService} from '../../service/training.service';
 import {Training} from '../../model/Training';
 import {FormControl} from '@angular/forms';
 import {AddReservationDialogComponent} from '../add-reservation-dialog/add-reservation-dialog.component';
+import * as firebase from 'firebase';
+import Timestamp = firebase.firestore.Timestamp;
 
 @Component({
   selector: 'app-reservations',
@@ -20,7 +22,7 @@ export class ReservationsComponent implements AfterViewInit, OnInit {
   dataSource: ReservationsDataSource;
   trainings: Training[];
   trainingSelect = new FormControl();
-  displayedColumns = ['player', 'partner', 'delete'];
+  displayedColumns = ['player', 'partner', 'date', 'delete'];
 
   constructor(public dialog: MatDialog, private reservationService: ReservationService, private trainingService: TrainingService) {
   }
@@ -58,5 +60,9 @@ export class ReservationsComponent implements AfterViewInit, OnInit {
 
   delete(reservationId: string): void {
     this.dialog.open(ConfirmDeleteDialogComponent, {data: reservationId});
+  }
+
+  toDate(timestamp: Timestamp): Date {
+    return timestamp.toDate();
   }
 }

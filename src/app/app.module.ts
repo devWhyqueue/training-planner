@@ -1,5 +1,5 @@
 import {BrowserModule} from '@angular/platform-browser';
-import {NgModule} from '@angular/core';
+import {LOCALE_ID, NgModule} from '@angular/core';
 
 import {AppComponent} from './component/app.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
@@ -17,6 +17,10 @@ import {AngularFireModule} from '@angular/fire';
 import {AngularFireDatabaseModule} from '@angular/fire/database';
 import {ConfirmDeleteDialogComponent} from './component/confirm-delete-dialog/confirm-delete-dialog.component';
 import {MatTableModule} from '@angular/material/table';
+import localeDe from '@angular/common/locales/de';
+import {registerLocaleData} from '@angular/common';
+
+registerLocaleData(localeDe);
 
 @NgModule({
   declarations: [
@@ -40,7 +44,7 @@ import {MatTableModule} from '@angular/material/table';
     AngularFireDatabaseModule,
     MatTableModule
   ],
-  providers: [],
+  providers: [{provide: LOCALE_ID, useValue: 'de-de'}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

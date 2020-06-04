@@ -20,6 +20,7 @@ export class AddReservationDialogComponent {
   }
 
   create(reservation: Reservation) {
+    reservation.date = new Date();
     this.reservationService.createReservation(reservation);
   }
 }
