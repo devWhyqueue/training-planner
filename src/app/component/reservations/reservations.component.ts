@@ -22,7 +22,7 @@ export class ReservationsComponent implements AfterViewInit, OnInit {
   dataSource: ReservationsDataSource;
   trainings: Training[];
   trainingSelect = new FormControl();
-  displayedColumns = ['player', 'partner', 'date', 'delete'];
+  displayedColumns = ['player', 'date', 'delete'];
 
   constructor(public dialog: MatDialog, private reservationService: ReservationService, private trainingService: TrainingService) {
   }
@@ -48,13 +48,17 @@ export class ReservationsComponent implements AfterViewInit, OnInit {
     });
   }
 
+  reservations(): number {
+    return this.dataSource.displayedData ? this.dataSource.displayedData.length : 0;
+  }
+
   canCreate(): boolean {
-    return this.dataSource.displayedData && this.dataSource.displayedData.length < 8;
+    return this.dataSource.displayedData && this.reservations() < 8;
   }
 
   create(): void {
     this.dialog.open(AddReservationDialogComponent, {
-      data: {player: undefined, partner: undefined, training: this.trainingSelect.value}
+      data: {player: undefined, training: this.trainingSelect.value}
     });
   }
 

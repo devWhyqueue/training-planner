@@ -16,7 +16,7 @@ export class AddReservationDialogComponent {
   }
 
   valid(): boolean {
-    return Boolean(this.reservation.player && this.reservation.partner);
+    return Boolean(this.reservation.player);
   }
 
   create(reservation: Reservation) {
