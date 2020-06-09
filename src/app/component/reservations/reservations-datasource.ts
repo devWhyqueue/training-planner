@@ -14,7 +14,7 @@ export class ReservationsDataSource extends DataSource<Reservation> {
 
   connect(): Observable<Reservation[]> {
     const reservationsObs = combineLatest([this.getReservations(), this.filter]).pipe(
-      map(([reservations, filter]) => reservations.filter(reservation => reservation.training.indexOf(filter) !== -1)));
+      map(([reservations, filter]) => reservations.filter(reservation => reservation.training === filter)));
     reservationsObs.subscribe(reservations => this.displayedData = reservations);
     return reservationsObs;
   }
