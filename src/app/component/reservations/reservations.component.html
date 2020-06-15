@@ -15,7 +15,7 @@
 
     <ng-container matColumnDef="date">
       <th mat-header-cell *matHeaderCellDef>Anmeldedatum</th>
-      <td mat-cell *matCellDef="let row">{{toDate(row.date) | date:'mediumDate'}}</td>
+      <td mat-cell *matCellDef="let row">{{Utils.toDate(row.date) | date:'mediumDate'}}</td>
     </ng-container>
 
     <ng-container matColumnDef="delete">

@@ -21,4 +21,9 @@ export class ReservationService {
   deleteReservation(id: string) {
     this.firestore.doc('reservations/' + id).delete();
   }
+
+  deleteAllReservationsWithTraining(trainingId: string) {
+    this.firestore.collection('reservations', ref => ref.where('training', '==', trainingId)).get()
+    .subscribe(res => res.forEach(doc => doc.ref.delete()));
+  }
 }

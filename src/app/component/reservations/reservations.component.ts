@@ -9,8 +9,8 @@ import {TrainingService} from '../../service/training.service';
 import {Training} from '../../model/Training';
 import {FormControl} from '@angular/forms';
 import {AddReservationDialogComponent} from '../add-reservation-dialog/add-reservation-dialog.component';
-import * as firebase from 'firebase';
-import Timestamp = firebase.firestore.Timestamp;
+import * as moment from 'moment';
+import Utils from 'src/app/Utils';
 
 @Component({
   selector: 'app-reservations',
@@ -23,6 +23,7 @@ export class ReservationsComponent implements AfterViewInit, OnInit {
   trainings: Training[];
   trainingSelect = new FormControl();
   displayedColumns = ['player', 'date', 'delete'];
+  Utils = Utils;
 
   constructor(public dialog: MatDialog, private reservationService: ReservationService, private trainingService: TrainingService) {
   }
@@ -45,6 +46,7 @@ export class ReservationsComponent implements AfterViewInit, OnInit {
         } as Training;
       });
       this.trainingSelect.setValue(this.trainings[0]);
+      this.weeklyCleanUp();
     });
   }
 
@@ -66,7 +68,13 @@ export class ReservationsComponent implements AfterViewInit, OnInit {
     this.dialog.open(ConfirmDeleteDialogComponent, {data: reservationId});
   }
 
-  toDate(timestamp: Timestamp): Date {
-    return timestamp.toDate();
+  weeklyCleanUp() {
+    for (const t of this.trainings) {
+      const lastClean = Utils.toDate(t.lastClean);
+      if (moment().diff(lastClean, 'days') > 6) {
+        this.reservationService.deleteAllReservationsWithTraining(t.id);
+        this.trainingService.updateLastClean(t.id);
+      }
+    }
   }
 }

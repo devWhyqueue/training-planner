@@ -12,4 +12,8 @@ export class TrainingService {
   getTrainings() {
     return this.firestore.collection('trainings').snapshotChanges();
   }
+
+  updateLastClean(id: string) {
+    this.firestore.doc('trainings/' + id).update({lastClean: new Date()});
+  }
 }

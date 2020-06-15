@@ -3,4 +3,5 @@ export interface Training {
   day: string;
   time: string;
   limit: number;
+  lastClean: Date;
 }
