@@ -1,7 +1,5 @@
 export interface Training {
   id: string;
-  day: string;
-  time: string;
+  date: Date;
   limit: number;
-  lastClean: Date;
 }

@@ -22,7 +22,7 @@ export class ReservationsComponent implements AfterViewInit, OnInit {
   dataSource: ReservationsDataSource;
   trainings: Training[];
   trainingSelect = new FormControl();
-  displayedColumns = ['player', 'date', 'delete'];
+  displayedColumns = ['player', 'delete'];
   Utils = Utils;
 
   constructor(public dialog: MatDialog, private reservationService: ReservationService, private trainingService: TrainingService) {
@@ -70,11 +70,16 @@ export class ReservationsComponent implements AfterViewInit, OnInit {
 
   weeklyCleanUp() {
     for (const t of this.trainings) {
-      const lastClean = Utils.toDate(t.lastClean);
-      if (moment().diff(lastClean, 'days') > 6) {
+      const trainingDate = moment(Utils.toDate(t.date));
+      if (trainingDate.diff(moment(), 'days') < 0) {
         this.reservationService.deleteAllReservationsWithTraining(t.id);
-        this.trainingService.updateLastClean(t.id);
+        const nextTraining = trainingDate.add(1, 'week');
+        this.trainingService.updateTrainingDate(t.id, nextTraining.toDate());
       }
     }
+  }
+
+  dateStr(date: Date): string {
+    return moment(Utils.toDate(date)).format('dddd, Do MMMM, HH:mm [Uhr]');
   }
 }

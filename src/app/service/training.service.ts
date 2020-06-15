@@ -13,7 +13,7 @@ export class TrainingService {
     return this.firestore.collection('trainings').snapshotChanges();
   }
 
-  updateLastClean(id: string) {
-    this.firestore.doc('trainings/' + id).update({lastClean: new Date()});
+  updateTrainingDate(id: string, nextDate: Date) {
+    this.firestore.doc('trainings/' + id).update({date: nextDate});
   }
 }
