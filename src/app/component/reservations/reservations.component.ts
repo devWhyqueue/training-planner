@@ -23,7 +23,6 @@ export class ReservationsComponent implements AfterViewInit, OnInit {
   trainings: Training[];
   trainingSelect = new FormControl();
   displayedColumns = ['player', 'delete'];
-  Utils = Utils;
 
   constructor(public dialog: MatDialog, private reservationService: ReservationService, private trainingService: TrainingService) {
   }
