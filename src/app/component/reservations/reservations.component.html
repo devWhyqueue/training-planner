@@ -1,7 +1,7 @@
 <mat-form-field>
   <mat-label>Training</mat-label>
   <mat-select [formControl]="trainingSelect">
-    <mat-option *ngFor="let training of trainings" [value]="training.id">
+    <mat-option *ngFor="let training of trainings" [value]="training">
       {{training.day}}, {{training.time}}
     </mat-option>
   </mat-select>
@@ -19,8 +19,9 @@
     </ng-container>
 
     <ng-container matColumnDef="delete">
-      <th mat-header-cell *matHeaderCellDef><span class="font-weight-bold">{{reservations()}}</span>/8
-        reserviert
+      <th mat-header-cell *matHeaderCellDef>
+        <span class="font-weight-bold">{{reservations()}}</span>
+        <span *ngIf="trainingSelect.value">/{{trainingSelect.value.limit}} reserviert</span>
       </th>
       <td mat-cell *matCellDef="let row">
         <button mat-icon-button color="warn" (click)="delete(row.id)">

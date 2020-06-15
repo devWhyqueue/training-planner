@@ -44,7 +44,7 @@ export class ReservationsComponent implements AfterViewInit, OnInit {
           ...(e.payload.doc.data() as object)
         } as Training;
       });
-      this.trainingSelect.setValue(this.trainings[0].id);
+      this.trainingSelect.setValue(this.trainings[0]);
     });
   }
 
@@ -53,12 +53,12 @@ export class ReservationsComponent implements AfterViewInit, OnInit {
   }
 
   canCreate(): boolean {
-    return this.dataSource.displayedData && this.reservations() < 8;
+    return this.dataSource.displayedData && this.reservations() < this.trainingSelect.value.limit;
   }
 
   create(): void {
     this.dialog.open(AddReservationDialogComponent, {
-      data: {player: undefined, training: this.trainingSelect.value}
+      data: {player: undefined, training: this.trainingSelect.value.id}
     });
   }
 
