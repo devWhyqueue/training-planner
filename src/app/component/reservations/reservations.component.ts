@@ -44,9 +44,14 @@ export class ReservationsComponent implements AfterViewInit, OnInit {
           ...(e.payload.doc.data() as object)
         } as Training;
       });
-      this.trainingSelect.setValue(this.trainings[0]);
+      this.trainingSelect.setValue(this.nextTraining());
       this.weeklyCleanUp();
     });
+  }
+
+  nextTraining(): Training {
+    return this.trainings.reduce((a, b) =>
+      moment(Utils.toDate(a.date)).diff(moment()) < moment(Utils.toDate(b.date)).diff(moment()) ? a : b);
   }
 
   reservations(): number {
