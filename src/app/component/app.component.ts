@@ -10,4 +10,8 @@ export class AppComponent {
   constructor() {
     moment.locale('de');
   }
+
+  isSummerHolidays(): boolean {
+    return moment().isBefore(moment('2020-08-11'));
+  }
 }

@@ -50,7 +50,8 @@ export class ReservationsComponent implements AfterViewInit, OnInit {
   }
 
   nextTraining(): Training {
-    return this.trainings.reduce((a, b) =>
+    const nextTrainings = this.trainings.filter(t => moment(Utils.toDate(t.date)).diff(moment()) > 0);
+    return nextTrainings.reduce((a, b) =>
       moment(Utils.toDate(a.date)).diff(moment()) < moment(Utils.toDate(b.date)).diff(moment()) ? a : b);
   }
 

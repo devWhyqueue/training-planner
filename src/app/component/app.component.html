@@ -1,4 +1,28 @@
-<div class="flex flex-column">
-  <app-reservations></app-reservations>
+<div class="flex justify-content-center" *ngIf="isSummerHolidays(); else elseBlock">
+  <figure>
+    <img src="assets/summer.gif" class="mx-auto d-block mb-2" alt="Summer">
+    <figcaption class="text-center">
+      <pre class="rainbow-text">
+<span style="color:#ff3400">F</span><span style="color:#ff6900">e</span><span style="color:#ff9e00">r</span><span
+        style="color:#ffd300">i</span><span style="color:#f6ff00">e</span><span
+        style="color:#c1ff00">n</span><span style="color:#8cff00">!</span>&nbsp;<span
+        style="color:#23ff00">G</span><span style="color:#00ff11">e</span><span
+        style="color:#00ff46">n</span><span style="color:#00ff7b">i</span><span
+        style="color:#00ffaf">e</span><span style="color:#00ffe4">ß</span><span
+        style="color:#00e4ff">t</span>&nbsp;<span style="color:#007bff">d</span><span
+        style="color:#0046ff">e</span><span style="color:#0011ff">n</span>&nbsp;<span
+        style="color:#5700ff">S</span><span style="color:#8c00ff">o</span><span
+        style="color:#c100ff">m</span><span style="color:#f600ff">m</span><span
+        style="color:#ff00d3">e</span><span style="color:#ff009e">r</span>&nbsp;<span
+        style="color:#ff0034">;</span><span style="color:#ff0000">)</span>
+</pre>
+    </figcaption>
+  </figure>
 </div>
+<ng-template #elseBlock>
+  <div class="flex flex-column">
+    <app-reservations></app-reservations>
+  </div>
+</ng-template>
+
 
